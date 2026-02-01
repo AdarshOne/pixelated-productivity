@@ -3,8 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Classic Macintosh 1984 - Pure Black & White */
-:root {
+/* Base (Basic) - Classic Macintosh B&W */
+:root,
+[data-theme="basic"] {
   --background: #ffffff;
   --foreground: #000000;
   --card: #ffffff;
@@ -38,6 +39,54 @@
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #000000;
   --sidebar-ring: #000000;
+}
+
+/* Flowers - soft pinks & greens */
+[data-theme="flowers"] {
+  --background: #fdf2f8;
+  --foreground: #4a044e;
+  --card: #fce7f3;
+  --primary: #9d174d;
+  --primary-foreground: #fdf2f8;
+  --accent: #166534;
+  --border: #be185d;
+  --input: #fce7f3;
+}
+
+/* Mountains - blues & grays */
+[data-theme="mountains"] {
+  --background: #f0f9ff;
+  --foreground: #0c4a6e;
+  --card: #e0f2fe;
+  --primary: #0369a1;
+  --primary-foreground: #f0f9ff;
+  --accent: #475569;
+  --border: #0284c7;
+  --input: #e0f2fe;
+}
+
+/* Cake - warm yellows & browns */
+[data-theme="cake"] {
+  --background: #fffbeb;
+  --foreground: #78350f;
+  --card: #fef3c7;
+  --primary: #b45309;
+  --primary-foreground: #fffbeb;
+  --accent: #92400e;
+  --border: #d97706;
+  --input: #fef3c7;
+}
+
+/* Science - tech blues & greens */
+[data-theme="science"] {
+  --background: #ecfdf5;
+  --foreground: #064e3b;
+  --card: #d1fae5;
+  --primary: #047857;
+  --primary-foreground: #ecfdf5;
+  --accent: #0e7490;
+  --border: #059669;
+  --input: #d1fae5;
 }
 
 @theme inline {
@@ -81,53 +130,84 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Theme background graphics - cute patterns per theme */
+.theme-bg {
+  background-color: var(--background);
+  background-repeat: repeat;
+  background-size: auto;
+}
+.theme-bg.theme-basic {
+  background-image: none;
+}
+.theme-bg.theme-flowers {
+  background-image: url("/themes/flowers.svg");
+  background-size: 120px 120px;
+}
+.theme-bg.theme-mountains {
+  background-image: url("/themes/mountains.svg");
+  background-size: 400px 200px;
+  background-position: bottom center;
+  background-repeat: repeat-x;
+}
+.theme-bg.theme-cake {
+  background-image: url("/themes/cake.svg");
+  background-size: 100px 100px;
+}
+.theme-bg.theme-science {
+  background-image: url("/themes/science.svg");
+  background-size: 100px 100px;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
     image-rendering: pixelated;
+  }
+  html {
+    font-size: 20px;
   }
   body {
     @apply bg-background text-foreground;
   }
 }
 
-/* Retro Mac pixel borders */
+/* Retro Mac pixel borders - use CSS variables so themes apply */
 .mac-window {
-  border: 2px solid #000000;
-  box-shadow: 2px 2px 0px #000000;
+  border: 2px solid var(--foreground);
+  box-shadow: 2px 2px 0 var(--foreground);
 }
 
 .mac-title-bar {
   background: linear-gradient(
     to bottom,
-    #ffffff 0%,
-    #ffffff 20%,
-    #000000 20%,
-    #000000 25%,
-    #ffffff 25%,
-    #ffffff 45%,
-    #000000 45%,
-    #000000 50%,
-    #ffffff 50%,
-    #ffffff 70%,
-    #000000 70%,
-    #000000 75%,
-    #ffffff 75%,
-    #ffffff 100%
+    var(--background) 0%,
+    var(--background) 20%,
+    var(--foreground) 20%,
+    var(--foreground) 25%,
+    var(--background) 25%,
+    var(--background) 45%,
+    var(--foreground) 45%,
+    var(--foreground) 50%,
+    var(--background) 50%,
+    var(--background) 70%,
+    var(--foreground) 70%,
+    var(--foreground) 75%,
+    var(--background) 75%,
+    var(--background) 100%
   );
-  border-bottom: 2px solid #000000;
+  border-bottom: 2px solid var(--foreground);
 }
 
 .mac-button {
-  border: 2px solid #000000;
-  background: #ffffff;
-  box-shadow: 2px 2px 0px #000000;
+  border: 2px solid var(--foreground);
+  background: var(--background);
+  box-shadow: 2px 2px 0 var(--foreground);
   transition: none;
 }
 
 .mac-button:hover {
-  background: #000000;
-  color: #ffffff;
+  background: var(--foreground);
+  color: var(--background);
 }
 
 .mac-button:active {
@@ -138,12 +218,12 @@
 .mac-checkbox {
   width: 16px;
   height: 16px;
-  border: 2px solid #000000;
-  background: #ffffff;
+  border: 2px solid var(--foreground);
+  background: var(--background);
 }
 
 .mac-checkbox.checked {
-  background: #000000;
+  background: var(--foreground);
 }
 
 .pixel-text {

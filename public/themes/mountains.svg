@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
+  <!-- Cute pixel-style mountain silhouettes at bottom -->
+  <path fill="rgba(12,74,110,0.08)" d="M0 200 L0 120 L50 80 L100 120 L150 60 L200 100 L250 50 L300 90 L350 70 L400 110 L400 200 Z"/>
+  <path fill="rgba(3,105,161,0.06)" d="M0 200 L30 140 L80 100 L130 140 L180 90 L230 130 L280 80 L330 120 L400 90 L400 200 Z"/>
+  <path fill="rgba(71,85,105,0.05)" d="M0 200 L60 160 L120 130 L180 160 L240 120 L300 150 L360 130 L400 150 L400 200 Z"/>
+</svg>

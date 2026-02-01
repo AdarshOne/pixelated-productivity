@@ -1,0 +1,17 @@
+{
+  "name": "Focus - Retro Productivity",
+  "short_name": "Focus",
+  "description": "A minimalist productivity app with calendar and tasks",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

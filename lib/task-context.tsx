@@ -8,6 +8,7 @@ interface TaskContextType {
   viewMode: ViewMode;
   setViewMode: (mode: ViewMode) => void;
   addTask: (title: string, isPriority: boolean, date: string) => boolean;
+  updateTask: (id: string, updates: { title?: string; isPriority?: boolean }) => boolean;
   toggleTask: (id: string) => void;
   deleteTask: (id: string) => void;
   getTodayTasks: () => Task[];
@@ -108,6 +109,38 @@ export function TaskProvider({ children }: { children: ReactNode }) {
     return true;
   }, [canAddPriorityTask, canAddOptionalTask]);
 
+  const updateTask = useCallback((id: string, updates: { title?: string; isPriority?: boolean }): boolean => {
+    const task = tasks.find(t => t.id === id);
+    if (!task) return false;
+    if (updates.title !== undefined) {
+      if (!updates.title.trim()) return false;
+      const date = task.date;
+      const otherTasks = tasks.filter(t => t.id !== id && t.date === date);
+      const newPriority = updates.isPriority ?? task.isPriority;
+      const priorityCount = otherTasks.filter(t => t.isPriority).length + (newPriority ? 1 : 0);
+      const optionalCount = otherTasks.filter(t => !t.isPriority).length + (newPriority ? 0 : 1);
+      if (newPriority && priorityCount > 3) return false;
+      if (!newPriority && optionalCount > 3) return false;
+    }
+    if (updates.isPriority !== undefined) {
+      const date = task.date;
+      const otherTasks = tasks.filter(t => t.id !== id && t.date === date);
+      const priorityCount = otherTasks.filter(t => t.isPriority).length + (updates.isPriority ? 1 : 0);
+      const optionalCount = otherTasks.filter(t => !t.isPriority).length + (updates.isPriority ? 0 : 1);
+      if (priorityCount > 3 || optionalCount > 3) return false;
+    }
+    setTasks(prev => prev.map(t =>
+      t.id === id
+        ? {
+            ...t,
+            ...(updates.title !== undefined && { title: updates.title.trim() }),
+            ...(updates.isPriority !== undefined && { isPriority: updates.isPriority }),
+          }
+        : t
+    ));
+    return true;
+  }, [tasks]);
+
   const toggleTask = useCallback((id: string) => {
     setTasks(prev => prev.map(task => 
       task.id === id ? { ...task, completed: !task.completed } : task
@@ -134,6 +167,7 @@ export function TaskProvider({ children }: { children: ReactNode }) {
       viewMode,
       setViewMode,
       addTask,
+      updateTask,
       toggleTask,
       deleteTask,
       getTodayTasks,

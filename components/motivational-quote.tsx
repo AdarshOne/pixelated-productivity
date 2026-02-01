@@ -39,14 +39,14 @@ export function MotivationalQuote() {
   const currentQuote = quotes[quoteIndex];
 
   return (
-    <div className="border-2 border-foreground p-3 bg-background">
+    <div className="border-2 border-foreground p-4 bg-background">
       <div className="flex items-start gap-2">
-        <span className="text-lg flex-shrink-0">{'"'}</span>
+        <span className="text-2xl flex-shrink-0">{'"'}</span>
         <div className="flex-1">
-          <p className="text-sm leading-relaxed">{currentQuote.text}</p>
-          <p className="text-xs mt-1 opacity-70">- {currentQuote.author}</p>
+          <p className="text-xl leading-relaxed">{currentQuote.text}</p>
+          <p className="text-base mt-2 opacity-70">— {currentQuote.author}</p>
         </div>
-        <span className="text-lg flex-shrink-0">{'"'}</span>
+        <span className="text-2xl flex-shrink-0">{'"'}</span>
       </div>
     </div>
   );

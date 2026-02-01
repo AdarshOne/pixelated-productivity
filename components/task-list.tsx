@@ -15,17 +15,16 @@ export function TaskList({ tasks, emptyMessage }: TaskListProps) {
   if (tasks.length === 0) {
     return (
       <div className="border-2 border-dashed border-foreground p-6 text-center">
-        <p className="text-lg opacity-70">{emptyMessage}</p>
+        <p className="text-xl opacity-70">{emptyMessage}</p>
       </div>
     );
   }
 
   return (
     <div className="space-y-4">
-      {/* Priority Tasks */}
       {priorityTasks.length > 0 && (
         <div>
-          <h3 className="text-sm mb-2 border-b border-foreground pb-1">
+          <h3 className="text-lg mb-2 border-b border-foreground pb-1">
             * PRIORITY TASKS ({priorityTasks.length}/3)
           </h3>
           <div>
@@ -36,10 +35,9 @@ export function TaskList({ tasks, emptyMessage }: TaskListProps) {
         </div>
       )}
       
-      {/* Optional Tasks */}
       {optionalTasks.length > 0 && (
         <div>
-          <h3 className="text-sm mb-2 border-b border-foreground pb-1">
+          <h3 className="text-lg mb-2 border-b border-foreground pb-1">
             OPTIONAL TASKS ({optionalTasks.length}/3)
           </h3>
           <div>

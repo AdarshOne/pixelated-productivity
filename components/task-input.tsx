@@ -48,8 +48,8 @@ export function TaskInput({ mode }: TaskInputProps) {
 
   if (isFull) {
     return (
-      <div className="border-2 border-foreground p-3 bg-background">
-        <p className="text-center text-sm">
+      <div className="border-2 border-foreground p-4 bg-background">
+        <p className="text-center text-lg">
           [ TASK LIMIT REACHED: 3/3 PRIORITY + 3/3 OPTIONAL ]
         </p>
       </div>
@@ -64,39 +64,36 @@ export function TaskInput({ mode }: TaskInputProps) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Enter task..."
-          className="flex-1 border-2 border-foreground px-3 py-2 bg-background text-foreground placeholder:text-foreground/50 text-lg focus:outline-none"
+          className="flex-1 border-2 border-foreground px-3 py-2 bg-background text-foreground placeholder:text-foreground/50 text-xl focus:outline-none"
         />
         <button
           type="submit"
           disabled={!canAdd || !title.trim()}
-          className="mac-button px-4 py-2 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          className="mac-button px-4 py-2 text-xl disabled:opacity-50 disabled:cursor-not-allowed"
         >
           ADD
         </button>
       </div>
-      
-      {/* Priority toggle */}
-      <div className="flex items-center gap-4 text-sm">
+      <div className="flex items-center gap-4 text-base">
         <button
           type="button"
           onClick={() => canAddPriority && setIsPriority(true)}
           disabled={!canAddPriority}
           className={`flex items-center gap-2 ${!canAddPriority ? 'opacity-50' : ''}`}
         >
-          <span className={`w-4 h-4 border-2 border-foreground flex items-center justify-center ${isPriority ? 'bg-foreground' : 'bg-background'}`}>
-            {isPriority && <span className="text-background text-xs">X</span>}
+          <span className={`w-5 h-5 border-2 border-foreground flex items-center justify-center ${isPriority ? 'bg-foreground' : 'bg-background'}`}>
+            {isPriority && <span className="text-background text-sm">✓</span>}
           </span>
           <span>*PRIORITY ({priorityCount}/3)</span>
         </button>
-        
         <button
           type="button"
           onClick={() => canAddOptional && setIsPriority(false)}
           disabled={!canAddOptional}
           className={`flex items-center gap-2 ${!canAddOptional ? 'opacity-50' : ''}`}
         >
-          <span className={`w-4 h-4 border-2 border-foreground flex items-center justify-center ${!isPriority ? 'bg-foreground' : 'bg-background'}`}>
-            {!isPriority && <span className="text-background text-xs">X</span>}
+          <span className={`w-5 h-5 border-2 border-foreground flex items-center justify-center ${!isPriority ? 'bg-foreground' : 'bg-background'}`}>
+            {!isPriority && <span className="text-background text-sm">✓</span>}
           </span>
           <span>OPTIONAL ({optionalCount}/3)</span>
         </button>

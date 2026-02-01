@@ -63,19 +63,19 @@ export function MiniCalendar() {
           type="button"
           onClick={() => setMonthOffset(prev => prev - 1)}
           disabled={!canGoBack}
-          className={`w-5 h-5 border border-foreground flex items-center justify-center text-xs ${
+          className={`w-7 h-7 border-2 border-foreground flex items-center justify-center text-base ${
             canGoBack ? 'hover:bg-foreground hover:text-background' : 'opacity-30 cursor-not-allowed'
           }`}
           aria-label="Previous month"
         >
           {'<'}
         </button>
-        <span className="text-sm font-bold">{month} {year}</span>
+        <span className="text-lg font-bold">{month} {year}</span>
         <button
           type="button"
           onClick={() => setMonthOffset(prev => prev + 1)}
           disabled={!canGoForward}
-          className={`w-5 h-5 border border-foreground flex items-center justify-center text-xs ${
+          className={`w-7 h-7 border-2 border-foreground flex items-center justify-center text-base ${
             canGoForward ? 'hover:bg-foreground hover:text-background' : 'opacity-30 cursor-not-allowed'
           }`}
           aria-label="Next month"
@@ -84,34 +84,27 @@ export function MiniCalendar() {
         </button>
       </div>
       
-      {/* Day names */}
       <div className="grid grid-cols-7 border-b border-foreground">
         {dayNames.map((name, i) => (
           <div 
             key={`day-${name}-${i}`}
-            className="text-center text-xs py-1"
+            className="text-center text-base py-1"
           >
             {name}
           </div>
         ))}
       </div>
-      
-      {/* Calendar grid */}
-      <div className="grid grid-cols-7 text-xs">
-        {/* Empty cells for days before month starts */}
+      <div className="grid grid-cols-7 text-base">
         {Array.from({ length: firstDay }, (_, i) => (
-          <div key={`empty-${i}`} className="h-5" />
+          <div key={`empty-${i}`} className="h-7" />
         ))}
-        
-        {/* Days */}
         {days.map(day => {
           const isToday = isCurrentMonth && day === today;
           const isPast = isPastDay(day);
-          
           return (
             <div
               key={day}
-              className={`h-5 flex items-center justify-center relative ${
+              className={`h-7 flex items-center justify-center relative ${
                 isToday 
                   ? 'bg-foreground text-background font-bold' 
                   : ''
